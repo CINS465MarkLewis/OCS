@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}Login{% endblock %}
 {% block content %}
 <div class="grid-x grid-padding-x">
@@ -8,7 +7,6 @@
     <h4 class="text-center">Login</h4>
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
-
         {{ form.errors }}
         <label>{{ form.username.label_tag }}</label>
         {{ form.username }}

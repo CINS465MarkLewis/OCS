@@ -6,28 +6,47 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static "css/foundation.css" %}">
     <link rel="stylesheet" href="{% static "css/app.css" %}">
   </head>
 <body>
+  <br>
+  <div class="container">
+  <nav class="navbar navbar-inverse">
+ <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+    data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">OCS</a>
+  </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar">
+        <div class="dropdown-toggle">
+          <li>TEST DROPDOWN</li>
+          <div class="dropdown-menu">
+            <li>DATA1</li>
+            <li>DATA2</li>
+          </div>
+        </div>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <li><a href="/logout/">Logout {{ user.username }}</a></li>
+        {% else %}
+        <li><a href="/login/">Log In</a></li>
+        <li><a href="{% url "register" %}">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  </nav>
+</div>
   {% block content %}{% endblock %}
-<!-- Insert Form registration -->
-  <form class="callout text-center">
-  <h2>Become A Member</h2>
-  <div class="floated-label-wrapper">
-    <label for="full-name">Full name</label>
-    <input type="text" id="full-name" name="full name input" placeholder="Full name">
-  </div>
-  <div class="floated-label-wrapper">
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email input" placeholder="Email">
-  </div>
-  <div class="floated-label-wrapper">
-    <label for="pass">Password</label>
-    <input type="password" id="pass" name="password input" placeholder="Password">
-  </div>
-  <input class="button expanded" type="submit" value="Sign up">
-</form>
 
   <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
   <script src="{% static "js/vendor/jquery.js" %}"></script>

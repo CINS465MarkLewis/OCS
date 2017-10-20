@@ -2,9 +2,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-class suggestion_form(forms.Form):
-    suggestion = forms.CharField(label='Grocery', max_length=140)
-    
+
 class LoginForm(AuthenticationForm):
     username=forms.CharField(
         label="Username",

@@ -3,16 +3,8 @@
 
 {% block title %}Title{% endblock %}
 {% block content %}
-<ul>
-{% if user.is_authenticated %}
-<li><a href="/logout/">Logout {{ user.username }}</a></li>
-{% else %}
-<li><a href="/login/">Log In</a></li>
-{% endif %}
-{% endblock %}
-</ul>
-<!--<link rel="stylesheet" type="text/css" href="{% static "style.css" %}"/>-->
 
+{% endblock %}
 {% block scripts %}
 <script src="{% static "js/vendor/vue.js" %}"></script>
 <script src="{% static "js/vueapp.js" %}"></script>

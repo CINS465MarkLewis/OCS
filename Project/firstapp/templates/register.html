@@ -3,22 +3,22 @@
 {% block title %}Registration{% endblock %}
 {% block content %}
 <div class="grid-x grid-padding-x">
-  <!-- <div class="large-4 medium-4 small-12 cell"></div> -->
-  <div class="large-6 medium-6 small-12 large-offset-3 medium-offset-3 cell">
-
-    <form action="/register/" method="post">
-        {% csrf_token %}
-        <h4 class="text-center">Register</h4>
-        {{ form.errors }}
-        {{ form.username.label_tag }}
-        {{ form.username }}
-        {{ form.email.label_tag }}
-        {{ form.email }}
-        {{ form.password1.label_tag }}
-        {{ form.password1 }}
-        {{ form.password2.label_tag }}
-        {{ form.password2 }}
-        <input type="submit" class="button expanded" value="Register" />
+  <div class="large-4 medium-4 small-12 large-offset-4 medium-offset-4 cell">
+      <form class="callout text-center">
+      <h2>Become A Member</h2>
+      <div class="floated-label-wrapper">
+        <label for="full-name">Full name</label>
+        <input type="text" id="full-name" name="full name input" placeholder="Full name">
+      </div>
+      <div class="floated-label-wrapper">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email input" placeholder="Email">
+      </div>
+      <div class="floated-label-wrapper">
+        <label for="pass">Password</label>
+        <input type="password" id="pass" name="password input" placeholder="Password">
+      </div>
+      <input class="button expanded" type="submit" value="Sign up">
     </form>
   </div>
 </div>
