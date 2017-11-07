@@ -11,8 +11,8 @@ def index(request):
         'all_universities': all_universities
     }
     #return render(request,"default.html")
-    return HttpResponse(template.render(context, request))
-
+    #return HttpResponse(template.render(context, request))
+    return render(request, "base.html", context)
 def register(request):
     if request.method == 'POST':
         form = registration_form(request.POST)
@@ -26,4 +26,5 @@ def register(request):
 
 def detail(request, university_id):
     #copy of register to initially display all UNI list
-    return render(request,"default.html")
+    #return render(request,"base.html")
+    return HttpResponse("<h3>Details for University id: " + str(university_id) + "</h2>")
