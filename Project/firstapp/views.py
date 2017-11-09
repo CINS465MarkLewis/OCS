@@ -10,8 +10,6 @@ def index(request):
     context = {
         'all_universities': all_universities
     }
-    #return render(request,"default.html")
-    #return HttpResponse(template.render(context, request))
     return render(request, "base.html", context)
 def register(request):
     if request.method == 'POST':
@@ -25,6 +23,4 @@ def register(request):
     return render(request,"register.html",context)
 
 def detail(request, university_id):
-    #copy of register to initially display all UNI list
-    #return render(request,"base.html")
     return HttpResponse("<h3>Details for University id: " + str(university_id) + "</h2>")
