@@ -7,6 +7,6 @@ urlpatterns = [
     url(r'croom/$',views.home, name='croom'),
     url(r'post/$',views.post, name='post'),
     url(r'messages/$',views.Messages, name='messages'),
-    #/1,2 or university id
+    #1,2 or university id
     url(r'^(?P<university_id>[0-9]+)/$', views.detail, name='detail')
 ]

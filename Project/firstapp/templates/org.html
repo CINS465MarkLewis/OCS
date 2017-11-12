@@ -1,12 +1,62 @@
-<!-- {% extends "base.html" %} -->
+<!doctype html>
 {% load static %}
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static "css/foundation.css" %}">
+    <link rel="stylesheet" href="{% static "css/app.css" %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+<body>
+  <br>
+  <div class="container">
+  <nav class="navbar navbar-inverse">
+  <div class="navbar-header">
+    <a class="navbar-brand" rel="home" href="#" title="OCS">
+           <img style="max-width:175px; margin-top: -15px;"
+                src="{% static "ocs_logo.png" %}">
+       </a>
+  </div>
+  <div class="dropdown">
+    <div class="col-xs-1">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Full Listings
+      <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+          <li><a href="#">All Organizations</a></li>
+          <li><a href="#">All Universities</a></li>
+        </ul>
+      </div>
+  </div>
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <li><a href="/logout/">Logout {{ user.username }}</a></li>
+        <li><a href="{% url "croom" %}">Chat Room</a></li>
+        {% else %}
+        <li><a href="/login/">Log In</a></li>
+        <li><a href="{% url "register" %}">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  </nav>
+</div>
 
-{% block title %}Title{% endblock %}
-{% block content %}
-{{ university }}
-{% endblock %}
-{% block scripts %}
-<script src="{% static "js/vendor/vue.js" %}"></script>
-<script src="{% static "js/vueapp.js" %}"></script>
-
-{% endblock %}
+{{ test.uniName }}
+<br>
+State: {{ test.uniLoca }}
+<br>
+{{ test.uniLogo }}
+<br>
+<br>
+Club List:
+<br>
+<ul>
+    {% for org in test.org_set.all %}
+      <ul>{{ org.orgName }} -  Category: {{ org.orgCateg }}</ul>
+    {% endfor %}
+</ul>
