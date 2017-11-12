@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class University(models.Model):
     uniName = models.CharField(max_length=50) #uniName
@@ -14,3 +15,11 @@ class Org(models.Model):
     orgUni = models.CharField(max_length=100) #orgUniversity
     orgFoun = models.CharField(max_length=30) #orgFounded
     orgLogo = models.CharField(max_length=1000) #orgLogo
+
+class Chat(models.Model):
+    create = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User)
+    message = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.message

@@ -30,3 +30,21 @@ def detail(request, university_id):
     except University.DoesNotExist:
         raise Http404("University ID does not exist")
     return render(request, "org.html", {'test': test})
+
+def home(request):
+    c = Chat.objects.all()
+    return render(request, "croom.html", {'home': 'active', 'chat': c})
+
+def post(request):
+    if request.method == 'POST':
+        msg = request.POST.get('msgbox', None)
+        c = Chat(user=request.user, message=msg)
+        if msg != '':
+            c.save()
+        return JsonResponse({'msg':msg, 'user':c.user.username})
+    else:
+        return HttpResponse('POST')
+
+def Messages(request):
+    c = Chat.objects.all()
+    return render(request, 'messages.html', {'chat': c})
