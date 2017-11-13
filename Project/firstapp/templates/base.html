@@ -28,7 +28,7 @@
       <span class="caret"></span></button>
       <ul class="dropdown-menu">
           <li><a href="#">All Organizations</a></li>
-          <li><a href="#">All Universities</a></li>
+          <li><a href="/">All Universities</a></li>
         </ul>
       </div>
   </div>
@@ -45,6 +45,8 @@
   </div>
   </nav>
 </div>
+<div class="grid-x grid-padding-x">
+  <div class="large-4 medium-4 small-12 large-offset-2 medium-offset-4 cell">
   {% block content %}
     {% if all_universities %}
       {% for university in all_universities %}
@@ -54,6 +56,8 @@
       <h3>There are no Universities to view organizations from.</h3>
     {% endif %}
   {% endblock %}
+</div>
+</div>
   <link rel="stylesheet" type="text/css" href="{% static "style.css" %}">
   <script src="{% static "js/vendor/jquery.js" %}"></script>
   <script src="{% static "js/vendor/what-input.js" %}"></script>
