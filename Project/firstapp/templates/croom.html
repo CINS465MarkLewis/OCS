@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Chat Panel</title>
+    <title>Chat Room</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'chat.css' %}">
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <form id="chat-form" method="post" action="/post/">
+    <form id="chat-form" method="post" action="post/"> {% csrf_token %}
         <div id="chat-bottom" class="input-group">
             <input type="text" id="chat-msg" name="chat-msg" class="form-control"/>
             <span class="input-group-btn">
@@ -46,6 +46,5 @@
         </div>
     </form>
 </body>
-
 <script src="{% static 'chat.js' %}"></script>
 </html>

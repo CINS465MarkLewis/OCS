@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.template import loader
 from django.http import Http404
+from mysite import settings
 from .forms import *
 from .models import *
 
@@ -33,17 +34,17 @@ def detail(request, university_id):
 
 def home(request):
     c = Chat.objects.all()
-    return render(request, "croom.html", {'home': 'active', 'chat': c})
+    return render(request, "croom.html", {'croom': 'active', 'chat': c})
 
 def post(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         msg = request.POST.get('msgbox', None)
         c = Chat(user=request.user, message=msg)
         if msg != '':
             c.save()
-        return JsonResponse({'msg':msg, 'user':c.user.username})
+        return JsonResponse({ 'msg':msg, 'user':c.user.username })
     else:
-        return HttpResponse('POST')
+        return HttpResponse("Messsged")
 
 def Messages(request):
     c = Chat.objects.all()
