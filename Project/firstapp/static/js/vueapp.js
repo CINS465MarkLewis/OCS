@@ -1,9 +1,10 @@
 new Vue({
   el: 'studentOrg',
   data: {
-    votedOrg: []
+    votedOrgs: []
   }
 })
+
 var app4 = new Vue({
   el: '#app-4',
   data: {
