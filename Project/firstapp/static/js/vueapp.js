@@ -1,9 +1,9 @@
-new Vue({
+/*new Vue({
   el: 'studentOrg',
   data: {
     votedOrgs: []
   }
-})
+})*/
 
 var app4 = new Vue({
   el: '#app-4',

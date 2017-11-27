@@ -27,3 +27,6 @@ class Chat(models.Model):
 
     def __unicode__(self):
         return self.message
+class Thread(models.Model):
+    userUpVotes = models.ManyToManyField(User, blank=True, related_name='threadUpVotes')
+    userDownVotes = models.ManyToManyField(User, blank=True, related_name='threadDownVotes')
