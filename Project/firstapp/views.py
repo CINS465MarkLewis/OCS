@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.template import loader
 from django.http import Http404
@@ -26,10 +26,7 @@ def register(request):
     return render(request,"register.html",context)
 
 def detail(request, university_id):
-    try:
-        test = University.objects.get(pk=university_id)
-    except University.DoesNotExist:
-        raise Http404("University ID does not exist")
+    test = get_object_or_404(University, pk=university_id)
     return render(request, "org.html", {'test': test})
 
 def home(request):
