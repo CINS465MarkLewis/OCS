@@ -5,14 +5,13 @@ from django.http import Http404
 from mysite import settings
 from .forms import *
 from .models import *
+from django.views import generic
 
-def index(request):
-    all_universities = University.objects.all()
-    template = loader.get_template('base.html')
-    context = {
-        'all_universities': all_universities
-    }
-    return render(request, "base.html", context)
+class IndexView(generic.ListView):
+    template_name = "base.html"
+
+    def get_queryset(self):
+        return University.objects.all()
 
 def register(request):
     if request.method == 'POST':
@@ -25,9 +24,11 @@ def register(request):
     context = {"form":form}
     return render(request,"register.html",context)
 
-def detail(request, university_id):
-    test = get_object_or_404(University, pk=university_id)
-    return render(request, "org.html", {'test': test})
+class DetailView(generic.DetailView):
+    model = University
+    #test is name of object to view as in org.html
+    context_object_name= 'test'
+    template_name = "org.html"
 
 def home(request):
     c = Chat.objects.all()
