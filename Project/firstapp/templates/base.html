@@ -52,7 +52,7 @@
   {% block content %}
     {% if object_list %}
       {% for university in object_list %}
-
+      <!-- all_universities is now object_list -->
       <a href="{% url 'detail' university.id %}">{{ university.uniName }}</a><br>
       {% endfor %}
     {% else %}
