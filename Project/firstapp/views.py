@@ -8,7 +8,7 @@ from .models import *
 from django.views import generic
 
 class IndexView(generic.ListView):
-    template_name = "base.html"
+    template_name = "index.html"
 
     def get_queryset(self):
         return University.objects.all()
