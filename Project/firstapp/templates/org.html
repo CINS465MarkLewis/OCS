@@ -48,6 +48,9 @@
   </nav>
 </div>
 
+
+<!--
+
 {% if error_message %}
   <p>{{ error_message }}</p>
 {% endif %}
@@ -67,3 +70,56 @@ Club List:
       <ul>{{ org.orgName }} -  Category: {{ org.orgCateg }}</ul>
     {% endfor %}
 </ul>
+
+
+-->
+
+{% block body %}
+
+<div class="container-fluid club-container">
+    <div class="row">
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                  {% for university in object_list %}
+                    <a href="{% url 'detail' university.id %}">{{ university.uniName }}</a>
+                        {% if university.uniLogo %}
+                            <img src="{{ university.uniLogo }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1>{{ university.uniName }}<small>{{ university.uniLoca }}</small></h1>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-8 col-md-9">
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="active"><a href="#">View All</a></li>
+                <li role="presentation"><a href="#">Add New Club</a></li>
+            </ul>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>All Clubs</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Club Name</th>
+                            <th>Club Logo</th>
+                            <th>Club Category</th>
+                            <th>Club Founder</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}﻿

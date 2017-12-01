@@ -26,7 +26,6 @@ def register(request):
 
 class DetailView(generic.DetailView):
     model = University
-    #test is name of object to view as in org.html
     context_object_name= 'test'
     template_name = "org.html"
 
