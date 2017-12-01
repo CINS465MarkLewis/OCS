@@ -1,10 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 class University(models.Model):
     uniName = models.CharField(max_length=50) #uniName
     uniLoca = models.CharField(max_length=50) #uniLocation
     uniLogo = models.CharField(max_length=1000) #uniLogo
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.uniName + ' in ' + self.uniLoca

@@ -6,6 +6,7 @@ from mysite import settings
 from .forms import *
 from .models import *
 from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 class IndexView(generic.ListView):
     template_name = "index.html"
@@ -28,6 +29,11 @@ class DetailView(generic.DetailView):
     model = University
     context_object_name= 'test'
     template_name = "org.html"
+
+class UniversityCreate(CreateView):
+    model = University
+    template_name = "university_form.html"
+    fields = ['uniName', 'uniLogo', 'uniLoca']
 
 def home(request):
     c = Chat.objects.all()

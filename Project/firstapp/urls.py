@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'vote/$',views.vote,name='vote'),
     #1,2 or university id
     #url(r'^(?P<university_id>[0-9]+)/$', views.detail, name='detail')
-    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail')
+    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'university/add/$', views.UniversityCreate.as_view(), name='university-add')
 ]
