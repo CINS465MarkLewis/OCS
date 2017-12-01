@@ -1,37 +1,27 @@
 
 {% extends "base.html" %}
 {% block body %}
-<div class="grid-x grid-padding-x">
-  <div class="large-4 medium-4 small-12 large-offset-2 medium-offset-4 cell">
-    {% if object_list %}
-      {% for university in object_list %}
-      <a href="{% url 'detail' university.id %}">{{ university.uniName }}</a><br>
-      {% endfor %}
-    {% else %}
-      <h3>There are no Universities to view organizations from.</h3>
-    {% endif %}
-</div>
-</div>
-<!--
 <div class="university-container container-fluid">
     <div class="row">
         <div class="col-sm-12">
             <h3>Universities</h3>
         </div>
             {% if object_list %}
-                {% for university in all_universities %}
+                {% for university in object_list %}
                 <div class="col-sm-4 col-lg-2">
                     <div class="thumbnail">
-                        <a href="{% url 'detail' album.id %}">
+                      {% if university.uniLogo %}
+                        <a href="{% url 'detail' university.id %}">
                             <img src="{{ university.uniLogo}}" class="img-responsive">
                         </a>
+                        {% else %}
+                          <h3>No image to display</h3>
+                        {% endif %}
                         <div class="caption">
-                            <h2>{{ university.uniName }}</h2>
+                            <h3>{{ university.uniName }}</h3>
                             <h4>{{ university.uniLoca }}</h4>
 
-
                             <a href="{% url 'detail' university.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
-
 
                             <form action="#" method="post" style="display: inline;">
                                 {% csrf_token %}
@@ -40,12 +30,6 @@
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
                             </form>
-
-
-                            <a href="#" class="btn btn-default btn-sm btn-favorite" role="button">
-                                <span class="glyphicon glyphicon-star"></span>
-                            </a>
-
                         </div>
                     </div>
                 </div>
@@ -63,6 +47,4 @@
         {% endif %}
     </div>
 </div>
-
--->
 {% endblock %}﻿
