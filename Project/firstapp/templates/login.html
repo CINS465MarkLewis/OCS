@@ -1,20 +1,64 @@
-{% extends "base.html" %}
-{% block title %}Login{% endblock %}
+<!doctype html>
+{% load static %}
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Login{% endblock %}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/foundation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  </head>
+<body>
+  <div class="container-fluid">
+  <nav class="navbar navbar-inverse">
+  <div class="navbar-header">
+    <a class="navbar-brand" rel="home" href="/" title="OCS">
+           <img style="max-width:175px; margin-top: -15px;"
+                src="{% static "ocs_logo.png" %}">
+       </a>
+  </div>
+      <ul class="nav navbar-nav navbar-nav">
+        <li><a href="#">All Organizations</a></li>
+        <li><a href="/">All Universities</a></li>
+     </ul>
+     <form class="navbar-form navbar-left" role="search" method="get" action="#">
+       <div class="form-group">
+       <input type="text" class="form-control" name="query" value="">
+     </div>
+     </form>
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <li><a href="/logout/">Logout {{ user.username }}</a></li>
+        <li><a href="{% url "croom" %}">Chat Room</a></li>
+        <li><a href="{% url "vote" %}">Vote Here</a></li>
+        <li><a href="{% url "university-add" %}">Add University</a></li>
+        <li><a href="#">Add Organization</a></li>
+        {% else %}
+        <li><a href="/login/">Log In</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+    </div>
 {% block content %}
 <div class="grid-x grid-padding-x">
- <div class="large-4 medium-4 large-12 large-offset-4 medium-offset-4 cell">
-   <h4 class="text-center">Login</h4>
-   <form action="{% url 'login' %}" method="post">
-       {% csrf_token %}
-       {{ form.errors }}
-       <label>{{ form.username.label_tag }}</label>
-       {{ form.username }}
-       <label>{{ form.password.label_tag }}</label>
-       {{ form.password }}
-       <input type="submit" class="button expanded" value="Login" />
-       <a href="/register/" class="secondary button expanded">Register</a>
-       <input type="hidden" name="next" value="/" />
-   </form>
- </div>
+  <div class="large-4 medium-4 small-12 large-offset-4 medium-offset-4 cell">
+    <h4 class="text-center">Login</h4>
+    <form class="callout text-center" action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {{ form.errors }}
+        <label>{{ form.username.label_tag }}</label>
+        {{ form.username }}
+        <label>{{ form.password.label_tag }}</label>
+        {{ form.password }}
+        <input type="submit" class="button expanded" value="Login" />
+        <a href="/register/" class="secondary button expanded">Register</a>
+        <input type="hidden" name="next" value="/" />
+    </form>
+  </div>
 </div>
 {% endblock %}
+</body>
+</html>

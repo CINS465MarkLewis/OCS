@@ -1,25 +1,9 @@
 {% extends "base.html" %}
+
+
 {% block body %}
-
-
 <div class="container-fluid club-container">
     <div class="row">
-        <div class="col-sm-4 col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                  {% for university in object_list %}
-                    <a href="{% url 'detail' university.id %}">{{ university.uniName }}</a>
-                        {% if university.uniLogo %}
-                            <img src="{{ university.uniLogo }}" class="img-responsive">
-                        {% else %}
-                            <h3>No image to display</h3>
-                        {% endif %}
-                    </a>
-                    <h1>{{ university.uniName }}<small>{{ university.uniLoca }}</small></h1>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
 
         <div class="col-sm-8 col-md-9">
             <ul class="nav nav-pills" style="margin-bottom: 10px;">
@@ -41,11 +25,18 @@
                             <th>Club Founder</th>
                         </tr>
                         </thead>
+                        {% for org in test.org_set.all %}
+                        <tr>
+                            <td>{{ org.orgName }}</td>
+                            <td>{{ org.orgLogo }}</td>
+                            <td>{{ org.orgCateg }}</td>
+                            <td>{{ org.orgFoun }}</td>
+                        </tr>
+                            {% endfor %}
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}﻿

@@ -1,11 +1,10 @@
-
 {% extends "base.html" %}
 {% block body %}
 <div class="university-container container-fluid">
     <div class="row">
         <div class="col-sm-12">
-            <h3>Universities</h3>
-        </div>
+            <h4>Universities</h4>
+            </div>
             {% if object_list %}
                 {% for university in object_list %}
                 <div class="col-sm-4 col-lg-2">
@@ -20,15 +19,10 @@
                         <div class="caption">
                             <h3>{{ university.uniName }}</h3>
                             <h4>{{ university.uniLoca }}</h4>
-
-                            <a href="{% url 'detail' university.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
-
+                            <a href="{% url 'detail' university.id %}" class="btn btn-primary btn-sm" role="button">View Organizations</a>
                             <form action="#" method="post" style="display: inline;">
                                 {% csrf_token %}
                                 <input type="hidden" name="university_id" value="{{ university.id }}" />
-                                <button type="submit" class="btn btn-default btn-sm">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                </button>
                             </form>
                         </div>
                     </div>
@@ -36,11 +30,11 @@
                 {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
             {% endfor %}
         {% else %}
-            <div class="col-sm-12">
+            <div class="col-med-12">
                 <br>
-                <a href="#">
-                    <button type="button" class="btn btn-success">
-                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add a University
+                <a href="{% url "university-add" %}">
+                    <button type="button" class="btn-success">
+                        Add a University
                     </button>
                 </a>
             </div>
