@@ -1,4 +1,4 @@
-<!--Gathered from bootstrap-->
+<!--Gathered from bootstrap and Youtube from youtube.com/rakibtg-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -83,12 +83,12 @@
   })
 
   socket.on('my response',function(msg) {
-    console.log(msg)
     if(typeof msg.user !== 'undefined') {
       $('h1').remove()
       $('h3').remove()
-      $('div.msg-wrapper').append('<div class="msgbbl"><b>' +msg.user+'</b> ' + '</div>')
+      $('div.msg-wrapper').append('<div class="msgbbl"><b>' +msg.user+'</b> ' + msg.msg + '</div>')
     }
+    console.log(msg)
   })
   </script>
 </body>
