@@ -1,50 +1,94 @@
-{% load staticfiles %}
-
-<html>
-
-<head>
+<!--Gathered from bootstrap-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Chat Room</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'chat.css' %}">
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Latest compiled JavaScript -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-</head>
+    <style>
+      div.msgbbl {
+        background-color: #ddd;
+        padding: 5px 10px;
+        border-radius: 10px;
+        color: #555;
+        margin-bottom: 5px;
+      }
+    </style>
 
-<body>
-    <div id="chat-body" class="panel panel-default">
-        <div class="panel-heading">Chat Box</div>
-        <div id="msg-list-div" class="panel-body">
-            <ul id="msg-list" class="list-group">
-                {% for obj in chat %}
-                    {% if obj.user == request.user %}
-                        <li class="text-right list-group-item">{{ obj.message }}</li>
-                    {% else %}
-                        <li class="text-left list-group-item">{{ obj.message }}</li>
-                    {% endif %}
-                {% empty %}
-                    <li class="text-right list-group-item">No messages yet!</li>
-                {% endfor %}
-                <script>
-                    var chatlist = document.getElementById('msg-list-div');
-                    chatlist.scrollTop = chatlist.scrollHeight;
-                </script>
-            </ul>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <h1>Welcome to the Chat Room!</h1>
+
+    <div class="container-fluid">
+      <div class="well text-center">
+        <h5> Chat application </h5>
+      </div>
+      <div class="col-sm-8">
+        <div id="nomsg">
+          <h3> No message yet! </h3>
+          <div class="msg-wrapper"></div>
         </div>
+      </div>
+        <div class="col-sm-4">
+          <form action="" method="POST">
+            <b>Type your message below</b>
+            <hr>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="text" class="username form-control" id="exampleInputEmail1" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Message</label>
+            <input type="text" class="message form-control" id="exampleInputPassword1" placeholder="Message">
+          </div>
+          <button type="submit" class="btn btn-success">Send</button>
+        </form>
+      </div>
     </div>
 
-    <form id="chat-form" method="post" action="/post/">
-        <div id="chat-bottom" class="input-group">
-            <input type="text" id="chat-msg" name="chat-msg" class="form-control"/>
-            <span class="input-group-btn">
-                <input class="btn btn-default" id="send" type="submit" value="Send"/>
-            </span>
-        </div>
-    </form>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+
+    <script>
+    var socket = io.connect('http://' + document.domain + ':' + location.port)
+    socket.on('connect', function() {
+      socket.emit('test', {
+        data: "User connected"
+      })
+    var form =$('form').on('submit', function(e){
+      e.preventDefault()
+      var user_name = $('input.username').val()
+      var message = $('input.message').val()
+      socket.emit('test', {
+        user:user_name,
+        msg: message
+      })
+      $('input.message').val('').focus()
+    })
+  })
+
+  socket.on('my response',function(msg) {
+    console.log(msg)
+    if(typeof msg.user !== 'undefined') {
+      $('h1').remove()
+      $('div.msg-wrapper').append('<div class="msgbbl"><b>' +msg.user+'</b> ' + '</div>')
+    }
+  })
+  </script>
 </body>
-<script src="{% static 'chat.js' %}"></script>
 </html>
