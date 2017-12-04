@@ -23,11 +23,6 @@
         <li><a href="#">All Organizations</a></li>
         <li><a href="/">All Universities</a></li>
      </ul>
-     <form class="navbar-form navbar-left" role="search" method="get" action="#">
-       <div class="form-group">
-       <input type="text" class="form-control" name="query" value="">
-     </div>
-     </form>
       <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
         <li><a href="/logout/">Logout {{ user.username }}</a></li>
