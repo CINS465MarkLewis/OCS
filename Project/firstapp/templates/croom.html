@@ -86,6 +86,7 @@
     console.log(msg)
     if(typeof msg.user !== 'undefined') {
       $('h1').remove()
+      $('h3').remove()
       $('div.msg-wrapper').append('<div class="msgbbl"><b>' +msg.user+'</b> ' + '</div>')
     }
   })
