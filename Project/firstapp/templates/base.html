@@ -25,16 +25,13 @@
         <li><a href="/">All Universities</a></li>
      </ul>
       <ul class="nav navbar-nav navbar-right">
-        {% if user.is_authenticated %}
         <li><a href="/logout/">Logout {{ user.username }}</a></li>
         <li><a href="{% url "croom" %}">Chat Room</a></li>
         <li><a href="{% url "vote" %}">Vote Here</a></li>
         <li><a href="{% url "university-add" %}">Add University</a></li>
         <li><a href="{% url "org-add" %}">Add Organization</a></li>
-        {% else %}
         <li><a href="/login/">Log In</a></li>
         <li><a href="{% url 'register' %}">Register</a></li>
-        {% endif %}
       </ul>
     </nav>
     </div>
