@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="university-container container-fluid">
+<div class="university container-fluid">
     <div class="row">
         <div class="col-sm-12">
             <h4>Universities</h4>
@@ -13,8 +13,6 @@
                         <a href="{% url 'detail' university.id %}">
                             <img src="{{ university.uniLogo}}" class="img-responsive">
                         </a>
-                        {% else %}
-                          <h3>No image to display</h3>
                         {% endif %}
                         <div class="caption">
                             <h3>{{ university.uniName }}</h3>
@@ -29,15 +27,6 @@
                 </div>
                 {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
             {% endfor %}
-        {% else %}
-            <div class="col-med-12">
-                <br>
-                <a href="{% url "university-add" %}">
-                    <button type="button" class="btn-success">
-                        Add a University
-                    </button>
-                </a>
-            </div>
         {% endif %}
     </div>
 </div>

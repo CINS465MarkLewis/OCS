@@ -14,6 +14,10 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return University.objects.all()
 
+class OrgIndex(generic.ListView):
+    model = Org
+    template_name = "org_index.html"
+
 def register(request):
     if request.method == 'POST':
         form = registration_form(request.POST)
@@ -34,6 +38,12 @@ class UniversityCreate(CreateView):
     model = University
     template_name = "university_form.html"
     fields = ['uniName', 'uniLogo', 'uniLoca']
+
+class OrgCreate(CreateView):
+    model = Org
+    #reUsed uni form to reduce code
+    template_name = "university_form.html"
+    fields = ['orgName', 'orgLogo', 'orgFoun', 'orgCateg']
 
 def home(request):
     c = Chat.objects.all()

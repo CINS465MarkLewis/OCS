@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="organiztion container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Organizations</h4>
+            </div>
+              {% for org in object_list %}
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h3>{{ org.orgName }}</h3>
+                            <h4>{{ org.orgLogo }}</h4>
+                            <h5>Category: {{ org.orgCateg }}</h5>
+                            <h5>Founder: {{ org.orgFoun }}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}﻿

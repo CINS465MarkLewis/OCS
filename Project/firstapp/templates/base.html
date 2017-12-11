@@ -21,7 +21,7 @@
        </a>
   </div>
       <ul class="nav navbar-nav navbar-nav">
-        <li><a href="#">All Organizations</a></li>
+        <li><a href="{% url "org-index" %}">All Organizations</a></li>
         <li><a href="/">All Universities</a></li>
      </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -30,7 +30,7 @@
         <li><a href="{% url "croom" %}">Chat Room</a></li>
         <li><a href="{% url "vote" %}">Vote Here</a></li>
         <li><a href="{% url "university-add" %}">Add University</a></li>
-        <li><a href="#">Add Organization</a></li>
+        <li><a href="{% url "org-add" %}">Add Organization</a></li>
         {% else %}
         <li><a href="/login/">Log In</a></li>
         <li><a href="{% url 'register' %}">Register</a></li>

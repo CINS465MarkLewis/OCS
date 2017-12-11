@@ -15,7 +15,6 @@ class University(models.Model):
 
 class Org(models.Model):
     university = models.ForeignKey(University, on_delete=models.CASCADE)
-    #University may need to be removed, key for DB entry tied to Uni
     orgName = models.CharField(max_length=50) #orgName
     orgCateg = models.CharField(max_length=50) #orgCategory
     orgFoun = models.CharField(max_length=30) #orgFounded
