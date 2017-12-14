@@ -14,6 +14,5 @@ urlpatterns = [
     url(r'logout/$', views.logout,{
         'next_page':'/login'
     }),
-    url(r'',include('firstapp.urls'))
-
+    url(r'',include('firstapp.urls')),
     ]

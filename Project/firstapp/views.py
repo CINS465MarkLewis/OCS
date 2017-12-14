@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
-from django.template import loader
+from django.template import loader, RequestContext
 from django.http import Http404
 from mysite import settings
 from .forms import *
@@ -63,37 +63,17 @@ def Messages(request):
     c = Chat.objects.all()
     return render(request, 'messages.html', {'chat': c})
 
-def vote(request):
-   thread_id = int(request.POST.get('id'))
-   vote_type = request.POST.get('type')
-   vote_action = request.POST.get('action')
+def voteIndex(request):
+    latest_questions = Question.objects.order_by("-date")[:5]
+    context = {'latest_questions': latest_questions}
+    return render(request, 'polls/poll.html',context)
 
-   thread = get_object_or_404(Thread, pk=thread_id)
+def detail(request, question_id):
+    question = Question.objects.get(pk=question_id)
+    return render(request, 'polls/detail.html',{"question": question_id})
 
-   thisUserUpVote = thread.userUpVotes.filter(id = request.user.id).count()
-   thisUserDownVote = thread.userDownVotes.filter(id = request.user.id).count()
+def results(request, question_id):
+    return HttpResponse("results %s" % question_id)
 
-   if (vote_action == 'vote'):
-      if (thisUserUpVote == 0) and (thisUserDownVote == 0):
-         if (vote_type == 'up'):
-            thread.userUpVotes.add(request.user)
-         elif (vote_type == 'down'):
-            thread.userDownVotes.add(request.user)
-         else:
-            return HttpResponse('error-unknown vote type')
-      else:
-         return HttpResponse('error - already voted', thisUserUpVote, thisUserDownVote)
-   elif (vote_action == 'recall-vote'):
-      if (vote_type == 'up') and (thisUserUpVote == 1):
-         thread.userUpVotes.remove(request.user)
-      elif (vote_type == 'down') and (thisUserDownVote ==1):
-         thread.userDownVotes.remove(request.user)
-      else:
-         return HttpResponse('error - unknown vote type or no vote to recall')
-   else:
-      return HttpResponse('error - bad action')
-
-
-   num_votes = thread.userUpVotes.count() - thread.userDownVotes.count()
-
-   return HttpResponse(num_votes)
+def vote(request, question_id):
+    return HttpResponse("Vote on question %s" % question_id)

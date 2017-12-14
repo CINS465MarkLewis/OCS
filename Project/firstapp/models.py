@@ -15,6 +15,7 @@ class University(models.Model):
 
 class Org(models.Model):
     university = models.ForeignKey(University, on_delete=models.CASCADE)
+    #University may need to be removed, key for DB entry tied to Uni
     orgName = models.CharField(max_length=50) #orgName
     orgCateg = models.CharField(max_length=50) #orgCategory
     orgFoun = models.CharField(max_length=30) #orgFounded
@@ -30,6 +31,18 @@ class Chat(models.Model):
 
     def __unicode__(self):
         return self.message
-class Thread(models.Model):
-    userUpVotes = models.ManyToManyField(User, blank=True, related_name='threadUpVotes')
-    userDownVotes = models.ManyToManyField(User, blank=True, related_name='threadDownVotes')
+
+class Question(models.Model):
+    question_text = models.CharField(max_length = 100)
+    date = models.DateTimeField("published")
+
+    def __str__(self):
+        return self.question_text
+
+class Choice(models.Model):
+    choice_text = models.CharField(max_length = 100)
+    votes = models.IntegerField(default = 0)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.choice_text

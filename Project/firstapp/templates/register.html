@@ -27,7 +27,6 @@
         {% if user.is_authenticated %}
         <li><a href="/logout/">Logout {{ user.username }}</a></li>
         <li><a href="{% url "croom" %}">Chat Room</a></li>
-        <li><a href="{% url "vote" %}">Vote Here</a></li>
         <li><a href="{% url "university-add" %}">Add University</a></li>
         <li><a href="#">Add Organization</a></li>
         {% else %}
